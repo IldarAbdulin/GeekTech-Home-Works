@@ -3,41 +3,55 @@ import React, { useState, useEffect } from "react"
 // class App extends React.Component {
 //   constructor(props) {
 //     super(props);
-//     this.state = { seconds: 0 }
+//     this.state = {date: new Date()};
 //   }
-//   tick() {
-//     this.setState((state) => ({
-//       seconds: state.seconds + 1
-//     }))
-//   }
+
 //   componentDidMount() {
-//     this.interval = setInterval(() => this.tick(), 1000)
+//     this.timerID = setInterval(
+//       () => this.tick(),
+//       1000
+//     );
 //   }
+
 //   componentWillUnmount() {
-//     clearInterval(this.interval)
+//     clearInterval(this.timerID);
 //   }
+
+//   tick() {
+//     this.setState({
+//       date: new Date()
+//     });
+//   }
+
 //   render() {
-//     return <div>Seconds: {this.state.seconds}</div>
+//     return (
+//       <div>
+//         <h1>Hello, world!</h1>
+//         <h2>It is {this.state.date.toLocaleTimeString()} PM.</h2>
+//       </div>
+//     );
 //   }
 // }
 
 function App() {
-  const [seconds, setSeconds] = useState(0);
-  let tick;
+  const [date, setDate] = useState(new Date())
+  const tick = () => {
+    setDate(new Date())
+  }
   useEffect(() => {
-    tick = 
-      setInterval(() => {
-        setSeconds(seconds + 1)
-      }, 1000) 
+    const timerId = setInterval(() => {
+      tick()
+    }, 1000)
     return () => {
-      clearInterval(tick)
+      clearInterval(timerId)
     }
-  }, [seconds]);
+  }, [date])
   return (
     <div>
-      Секунды: {seconds}
+      <h1>Hello, world!</h1>
+      <h2>It is {date.toLocaleTimeString()} PM.</h2>
     </div>
-  );
+  )
 }
 
 export default App;
