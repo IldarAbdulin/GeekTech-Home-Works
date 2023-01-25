@@ -1,57 +1,46 @@
-import React, { useState, useEffect } from "react"
+import React, { useState, useEffect } from 'react';
 
-// class App extends React.Component {
-//   constructor(props) {
-//     super(props);
-//     this.state = {date: new Date()};
-//   }
-
-//   componentDidMount() {
-//     this.timerID = setInterval(
-//       () => this.tick(),
-//       1000
-//     );
-//   }
-
-//   componentWillUnmount() {
-//     clearInterval(this.timerID);
-//   }
-
-//   tick() {
-//     this.setState({
-//       date: new Date()
-//     });
-//   }
-
-//   render() {
-//     return (
-//       <div>
-//         <h1>Hello, world!</h1>
-//         <h2>It is {this.state.date.toLocaleTimeString()} PM.</h2>
-//       </div>
-//     );
-//   }
-// }
-
-function App() {
-  const [date, setDate] = useState(new Date())
-  const tick = () => {
-    setDate(new Date())
+class App extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {count: 0};
   }
-  useEffect(() => {
-    const timerId = setInterval(() => {
-      tick()
-    }, 1000)
-    return () => {
-      clearInterval(timerId)
-    }
-  }, [date])
-  return (
-    <div>
-      <h1>Hello, world!</h1>
-      <h2>It is {date.toLocaleTimeString()} PM.</h2>
-    </div>
-  )
+
+  plus() {
+    this.setState({
+      count: this.state.count + 1 
+    });
+  }
+  minus() {
+    this.setState({
+      count: this.state.count - 1 
+    });
+  }
+
+  render() {
+    return (
+      <div>
+        <button onClick={() => this.plus()}>+</button>
+        <button onClick={() => this.minus()}>-</button>
+        <h2>{this.state.count}</h2>
+      </div>
+    );
+  }
 }
+
+// function App() {
+//   const [visibleText, setVisibleText] = useState(true);
+//   const showText = () => {
+//     setVisibleText(!visibleText);
+//   };
+//   return (
+//     <div>
+//       <button onClick={showText}>
+//         {visibleText ? 'Скрыть текст' : 'Показать текст'}
+//       </button>
+//       <h2>{visibleText && <h1>Hello world!</h1>}</h2>
+//     </div>
+//   );
+// }
 
 export default App;
