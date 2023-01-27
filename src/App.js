@@ -2,43 +2,38 @@ import React, { useState, useEffect } from 'react';
 
 class App extends React.Component {
   constructor(props) {
-    super(props);
-    this.state = {count: 0};
+    super(props)
+    this.state =  {text: ''}
   }
-
-  plus() {
-    this.setState({
-      count: this.state.count + 1 
-    });
+  updatedText = (newText) => {
+      this.setState(() => ({
+        text: newText
+      }));
   }
-  minus() {
-    this.setState({
-      count: this.state.count - 1 
-    });
-  }
-
   render() {
-    return (
-      <div>
-        <button onClick={() => this.plus()}>+</button>
-        <button onClick={() => this.minus()}>-</button>
-        <h2>{this.state.count}</h2>
-      </div>
-    );
+      return (
+          <div>
+              <div>
+                  <input type="text" placeholder="Your message here.." onChange={(e) => this.updatedText(e.target.value)} />
+                  <p>the message is: {this.state.text}</p>
+              </div>
+          </div>
+      );
   }
 }
 
 // function App() {
-//   const [visibleText, setVisibleText] = useState(true);
-//   const showText = () => {
-//     setVisibleText(!visibleText);
+//   const [text, setText] = useState('');
+//   const handleSubmit = (e) => {
+//     e.preventDefault();
 //   };
+//   const handleChange = (e) => setText(e.target.value);
 //   return (
 //     <div>
-//       <button onClick={showText}>
-//         {visibleText ? 'Скрыть текст' : 'Показать текст'}
-//       </button>
-//       <h2>{visibleText && <h1>Hello world!</h1>}</h2>
+//       <form onSubmit={handleSubmit}>
+//         <input placeholder="Введите текст" onChange={handleChange} />
+//       </form>
+//       <h2>{text === '' ? 'Ваш текст будет тут' : text}</h2>
 //     </div>
 //   );
 // }
