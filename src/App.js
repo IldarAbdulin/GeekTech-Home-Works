@@ -52,53 +52,39 @@ import { useForm } from 'react-hook-form';
 // }
 
 function App() {
-  const { register, handleSubmit } = useForm();
-  const [users, setUsers] = useState([]);
-  const [name, setName] = useState('');
-  const [lastName, setLastName] = useState('');
-  const addUser = () => {
-    if (name === '' || lastName === '') {
-      return alert('Запоните все поля');
-    }
-    const user = {
-      id: Math.random() * 1000000000,
-      name: name,
-      lastName: lastName,
-    };
-    setUsers([...users, user]);
-    setName('');
-    setLastName('');
-  };
+  const {
+    register,
+    formState: { errors },
+    handleSubmit,
+  } = useForm();
+  const [users, setUsers] = useState('');
   return (
     <>
-      <form className="form" onSubmit={handleSubmit()}>
-        <input
-          {...register('firstName')}
-          placeholder="Имя"
-          onChange={(e) => setName(e.target.value)}
-          value={name}
-        />
-        <input
-          {...register('lastName')}
-          placeholder="Фамилия"
-          onChange={(e) => setLastName(e.target.value)}
-          value={lastName}
-        />
-        <input
-          type="submit"
-          value={`Добавить пользователя`}
-          onClick={addUser}
-        />
+      <form
+        className="form"
+        onSubmit={handleSubmit((user) => setUsers(JSON.stringify(user)))}
+      >
+        <div>
+          <input
+            {...register('firstName', {
+              required: 'Поле обязательно к заполнению',
+            })}
+            placeholder="First name"
+          />
+          {errors?.firstName && <p>{errors?.firstName.message}</p>}
+        </div>
+        <div>
+          <input
+            {...register('lastName', {
+              required: 'Поле обязательно к заполнению',
+            })}
+            placeholder="Last name"
+          />
+          {errors?.lastName && <p>{errors?.lastName.message}</p>}
+        </div>
+        <input type="submit" />
       </form>
-      <div className="user-list">
-        {users &&
-          users.map((user) => (
-            <div className="user" key={user.id}>
-              <p>Имя пользователя: {user.name}</p>
-              <p>Фамилия пользователя: {user.lastName}</p>
-            </div>
-          ))}
-      </div>
+      <div style={{ textAlign: 'center', padding: 20 }}>{users}</div>
     </>
   );
 }
