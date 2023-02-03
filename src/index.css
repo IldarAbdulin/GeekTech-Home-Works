@@ -3,28 +3,26 @@
   padding: 0;
   box-sizing: border-box;
 }
-.form {
-  padding: 20px;
-  justify-content: space-around;
+body {
+  background: url('./assets/4.png');
+}
+div {
+  position: relative;
+}
+img {
+  border-radius: 10%;
   display: flex;
-  background: rgba(139, 139, 139, 0.159);
-  box-shadow: 1px 1px 50px 5px rgba(0, 0, 0, 0.411);
-}
-input {
-  padding: 5px 20px;
-  border-radius: 10px;
-  cursor: pointer;
-}
-.user-list {
-  padding: 20px 0;
-}
-.user {
-  width: 60%;
+  justify-content: center;
+  width: 95%;
   margin: 0 auto;
-  border-radius: 10px;
-  padding: 10px 20px;
-  display: flex;
-  justify-content: space-around;
-  background: rgba(139, 139, 139, 0.319);
-  color: rgb(49, 49, 49);
+  height: 100vh;
+}
+h1 {
+  position: absolute;
+  top: 95%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: #ffffffe4;
+  font-weight: 500;
+  font-size: 40px;
 }
