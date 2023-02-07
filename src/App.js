@@ -1,43 +1,49 @@
+import axios from 'axios';
 import React from 'react';
 
-import firstImg from './assets/1.jpg'
-import secondImg from './assets/2.webp'
-import thirdImg from './assets/3.jpg'
-
-import { Swiper, SwiperSlide } from 'swiper/react';
-import { Navigation } from 'swiper';
-
-import 'swiper/css';
-import 'swiper/css/navigation';
+// function App() {
+//   const [date, setDate] = React.useState([]);
+//   React.useEffect(() => {
+//     axios
+//       .get('https://jsonplaceholder.typicode.com/posts')
+//       .then(({ data }) => setDate(data));
+//   }, []);
+//   return (
+//     <>
+//       {!date.length ? (
+//         <h1>Loading...</h1>
+//       ) : (
+//         <div>
+//           <h1 style={{color:'red'}}>POSTS:</h1>
+//           {date.map((item) => (
+//             <div key={item.id}>
+//               <p>{item.title}</p>
+//             </div>
+//           ))}
+//         </div>
+//       )}
+//     </>
+//   );
+// }
 
 function App() {
+  const [date, setDate] = React.useState(new Date())
+  const tick = () => {
+    setDate(new Date())
+  }
+  React.useEffect(() => {
+    const timerId = setInterval(() => {
+      tick()
+    }, 1000)
+    return () => {
+      clearInterval(timerId)
+    }
+  }, [date])
   return (
-    <Swiper
-      modules={[Navigation]}
-      spaceBetween={0}
-      slidesPerView={1}
-      navigation
-    >
-      <SwiperSlide>
-        <div>
-          <img src={firstImg} />
-          <h1>Slide 1</h1>
-        </div>
-      </SwiperSlide>
-      <SwiperSlide>
-      <div>
-          <img src={secondImg} />
-          <h1>Slide 2</h1>
-        </div>
-      </SwiperSlide>
-      <SwiperSlide>
-      <div>
-          <img src={thirdImg} />
-          <h1>Slide 3</h1>
-        </div>
-      </SwiperSlide>
-    </Swiper>
-  );
-};
+    <div>
+      <h2>Сейчас: {date.toLocaleTimeString()}</h2>
+    </div>
+  )
+}
 
 export default App;
